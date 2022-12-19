@@ -26,13 +26,13 @@ function draw() {
       const myY = y + 20 * sin(2 * PI * t + angle);
   
   if (random() > p) {
-      ellipse(myX, myY, 10);
+      ellipse(myX, myY, random(10,15));
       fill(random(30,50), random(40,60),random(120,140));
     noStroke();
 
   } else {
 
-      rect(myX, myY, 10, 10);
+      rect(myX, myY, random(10,15), random(10,15));
           fill(random(30,50), random(40,60),random(120,140));
         noStroke();
   }
