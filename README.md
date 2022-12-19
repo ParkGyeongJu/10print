@@ -22,7 +22,7 @@ function draw() {
       const angle = xAngle * (x / width) + yAngle * (y / height);
   
   
-        const myX = x + 20 * cos(2 * PI * t + angle);
+      const myX = x + 20 * cos(2 * PI * t + angle);
       const myY = y + 20 * sin(2 * PI * t + angle);
   
   if (random() > p) {
@@ -78,23 +78,15 @@ class Particle {
   update() {
     this.velocity.add(this.acceleration);
     this.position.add(this.velocity);
-    this.lifespan -= 2;
-    
-    this.checkEdge();
-  }
-  
-  checkEdge() {
-    if (this.position.y > height) {
-      this.velocity.y *= -1;
-      this.position.y = height;
-    }
+    this.lifespan -= 12;
   }
 
+
   display() {
-    stroke(255, this.lifespan);
-    strokeWeight(2);
-    fill(255, this.lifespan);
-    ellipse(this.position.x, this.position.y, 12, 12);
+    stroke(100, this.lifespan);
+    strokeWeight(3);
+    fill(255, this.lifespan*2);
+    ellipse(this.position.x, this.position.y, random(30,50), random(30,50));
   }
 
   isDead() {
@@ -105,10 +97,6 @@ class Particle {
     }
   }
 }
-
-
-
-
 
 
 class ParticleSystem {
@@ -123,8 +111,7 @@ class ParticleSystem {
     if (r < 0.5) {
       this.particles.push(new Particle(this.origin));
     } else {
-      this.particles.push(new Confetti(this.origin));
-      this.particles.push(new Line(this.origin));
+
     }
   }
 
@@ -133,63 +120,5 @@ class ParticleSystem {
       particle.run();
     }
     this.particles = this.particles.filter(particle => !particle.isDead());
-  }
-}
-
-
-class Confetti extends Particle {
-  
-  constructor(position) {
-    super(position);
-    this.w = 12;
-    this.synth = new p5.MonoSynth();
-    this.c = color(255);
-
-  }
-  
-  checkEdge() {
-    if (this.position.y > height) {
-      this.velocity.y *= -0.7;
-      this.position.y = height;
-      this.w = 40;
-      this.c = color(random(100, 200), random(100, 200), random(100, 200));
-      
-      let tones = ["C3","E3", "G3", "C4", "E4", "G4", "C6", "D6", "E6"];
-      this.synth.triggerAttack(tones[floor(random(9))]);
-      this.synth.triggerRelease(random(0.1, 0.8)); 
-    }
-  }
-
-  // Override the display method
-  display() {
-    rectMode(CENTER);
-    fill(this.c, this.lifespan);
-    stroke(255, this.lifespan);
-    strokeWeight(2);
-    push();
-    translate(this.position.x, this.position.y);
-    let theta = map(this.position.x, 0, width, 0, TWO_PI * 20);
-    rotate(theta);
-    rect(0, 0, this.w, this.w);
-    pop();
-  }
-}
-
-class Line extends Particle {
-  
-  constructor(position) {
-    super(position);
-    this.w = 12;
-  }
-  
-  display() {
-    stroke(255, this.lifespan);
-    strokeWeight(2);
-    push();
-    translate(this.position.x, this.position.y);
-    let theta = map(this.position.x, 0, width, TWO_PI*-2, TWO_PI * 2);
-    rotate(theta);
-    line(0, 0, 30, 30);
-    pop();
   }
 }
