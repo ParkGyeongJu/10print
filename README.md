@@ -1,6 +1,7 @@
 # 10print
 기말과제 10print 저널링 작성하기
 
+let t = 0;
 let x, y;
 x = 0;
 y = 0;
@@ -15,10 +16,14 @@ function setup() {
 }
 
 function draw() {
+      const xAngle = map(mouseX, 0, width, -4 * PI, 4 * PI, true);
+      const yAngle = map(mouseY, 0, height, -4 * PI, 4 * PI, true);
+      const angle = xAngle * (x / width) + yAngle * (y / height);
+
    if (random() > p) {
-  	line(x, y, x+w, y+w);
+  	line(cos(2 * PI * t + angle)x, y, x+w, y+w);
   } else {
-  	line(x+w, y, x, y+w);
+  	line(sin(2 * PI * t + angle)+w, y, x, y+w);
   }
     x = x + w;
   if (x > width) {
