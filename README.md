@@ -11,7 +11,7 @@ let p = 0.5;
 
 function setup() {
   createCanvas(400, 400);
-  background(0);
+  background(random(70,90), random(110,130),random(160,180));
   stroke(200);
 }
 
@@ -37,7 +37,7 @@ function draw() {
     x = 0;
   }
   if (y > height) {
-    background(0);
+    background(random(70,90),random(110,130),random(160,180));
     x = 0;
     y = 0;
   }
