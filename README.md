@@ -24,8 +24,12 @@ function draw() {
 
    if (random() > p) {
   	ellipse(myX, myY, 10);
+    fill(random(30,50), random(40,60),random(120,140));
+    noStroke();
   } else {
   	rect(myX, myY, 10, 10);
+    fill(random(30,50), random(40,60),random(120,140));
+    noStroke();
   }
     x = x + w;
   if (x > width) {
