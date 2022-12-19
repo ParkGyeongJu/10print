@@ -19,11 +19,13 @@ function draw() {
       const xAngle = map(mouseX, 0, width, -4 * PI, 4 * PI, true);
       const yAngle = map(mouseY, 0, height, -4 * PI, 4 * PI, true);
       const angle = xAngle * (x / width) + yAngle * (y / height);
+      const myX = x + 20 * cos(2 * PI * t + angle);
+      const myY = y + 20 * sin(2 * PI * t + angle);
 
    if (random() > p) {
-  	line(cos(2 * PI * t + angle)x, y, x+w, y+w);
+  	ellipse(myX, myY, 10);
   } else {
-  	line(sin(2 * PI * t + angle)+w, y, x, y+w);
+  	rect(myX, myY, 10, 10);
   }
     x = x + w;
   if (x > width) {
